@@ -1,0 +1,1606 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tyler &amp; Lizbeth · June 27, 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+  /* ── Reset ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ── Tokens ── */
+  :root {
+    --green-deep:  #1b4332;
+    --green-mid:   #2d6a4f;
+    --green-light: #52b788;
+    --caribbean:   #0096c7;
+    --turquoise:   #48cae4;
+    --coral:       #e76f51;
+    --hibiscus:    #c9184a;
+    --gold:        #c9a84c;
+    --cream:       #faf8f2;
+    --sand:        #f0e4c4;
+    --text-dark:   #1c1c1c;
+    --text-mid:    #4a4a4a;
+
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --sans:   'Raleway', sans-serif;
+    --script: 'Great Vibes', cursive;
+
+    --pad: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 7vw, 9rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ════════════════════════════════════════════
+     FLORA OVERLAY
+  ════════════════════════════════════════════ */
+  #flora-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    display: flex;
+    pointer-events: none;
+  }
+
+  .flora-panel {
+    flex: 1;
+    background: var(--green-deep);
+    overflow: hidden;
+    position: relative;
+  }
+
+  #flora-left  { animation: panelLeft  0.9s cubic-bezier(0.76, 0, 0.24, 1) 1.6s forwards; }
+  #flora-right { animation: panelRight 0.9s cubic-bezier(0.76, 0, 0.24, 1) 1.6s forwards; }
+
+  @keyframes panelLeft  { to { transform: translateX(-100%); } }
+  @keyframes panelRight { to { transform: translateX(100%);  } }
+
+  /* Center reveal title */
+  #flora-title {
+    position: fixed;
+    inset: 0;
+    z-index: 9500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    pointer-events: none;
+    animation: titleLife 2.2s ease forwards;
+  }
+
+  @keyframes titleLife {
+    0%   { opacity: 0; }
+    18%  { opacity: 1; }
+    72%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .ft-script {
+    font-family: var(--script);
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    color: #fff;
+    text-shadow: 0 3px 24px rgba(0,0,0,0.45);
+    line-height: 1.05;
+  }
+
+  .ft-divider {
+    width: 56px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin: 1.1rem auto;
+  }
+
+  .ft-sub {
+    font-family: var(--serif);
+    font-size: clamp(0.8rem, 2vw, 1.05rem);
+    font-weight: 300;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ════════════════════════════════════════════
+     NAV
+  ════════════════════════════════════════════ */
+  #nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 500;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+
+  #nav.solid {
+    background: rgba(27, 67, 50, 0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 28px rgba(0,0,0,0.28);
+  }
+
+  .nav-brand {
+    font-family: var(--script);
+    font-size: 1.65rem;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.2rem;
+  }
+
+  .nav-links a {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: #fff; }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ════════════════════════════════════════════
+     HERO
+  ════════════════════════════════════════════ */
+  #home {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--green-deep);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 18% 55%, rgba(0,150,199,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 82% 20%, rgba(82,183,136,0.22) 0%, transparent 50%),
+      linear-gradient(155deg, #1b4332 0%, #0c2619 65%, #081a10 100%);
+  }
+
+  .hero-deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-names {
+    font-family: var(--script);
+    font-size: clamp(4.5rem, 13vw, 10rem);
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 4px 36px rgba(0,0,0,0.3);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-and {
+    display: block;
+    font-size: 0.42em;
+    opacity: 0.65;
+    line-height: 1.8;
+  }
+
+  .hero-meta {
+    font-family: var(--serif);
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-meta em { margin: 0 0.6rem; opacity: 0.35; font-style: normal; }
+
+  /* Countdown */
+  .countdown {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cd-unit { text-align: center; }
+
+  .cd-num {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    display: block;
+  }
+
+  .cd-label {
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-top: 0.4rem;
+  }
+
+  .cd-sep {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    color: rgba(255,255,255,0.18);
+    padding-top: 0.15rem;
+    align-self: flex-start;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    animation: scrollBounce 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(7px); }
+  }
+
+  .scroll-chevron {
+    width: 18px;
+    height: 18px;
+    border-right: 1px solid rgba(255,255,255,0.28);
+    border-bottom: 1px solid rgba(255,255,255,0.28);
+    transform: rotate(45deg);
+    margin-top: -6px;
+  }
+
+  /* ════════════════════════════════════════════
+     SECTION SHARED
+  ════════════════════════════════════════════ */
+  .section-label {
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--green-deep);
+    margin-bottom: 2rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .divider {
+    width: 48px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--green-light), var(--caribbean));
+    margin-bottom: 2.5rem;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ════════════════════════════════════════════
+     OUR STORY
+  ════════════════════════════════════════════ */
+  #our-story {
+    padding: var(--pad);
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .story-text p {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-mid);
+    margin-bottom: 1.4rem;
+  }
+
+  .story-quote {
+    font-family: var(--script);
+    font-size: 2.2rem;
+    color: var(--green-mid);
+    line-height: 1.4;
+    padding: 1.25rem 0 1.25rem 1.4rem;
+    border-left: 3px solid var(--green-light);
+    margin: 2rem 0;
+  }
+
+  .story-img-wrap {
+    position: relative;
+  }
+
+  .story-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(145deg, var(--green-mid), var(--green-deep));
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .story-frame-label {
+    font-family: var(--script);
+    font-size: 1.8rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .story-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+  }
+
+  .story-deco-box {
+    position: absolute;
+    bottom: -1.4rem;
+    left: -1.4rem;
+    width: 110px;
+    height: 110px;
+    background: var(--sand);
+    border-radius: 3px;
+    z-index: -1;
+  }
+
+  /* ════════════════════════════════════════════
+     THE DAY
+  ════════════════════════════════════════════ */
+  #details {
+    padding: var(--pad);
+    background: var(--green-deep);
+    color: #fff;
+    text-align: center;
+  }
+
+  #details .section-label { color: var(--green-light); }
+  #details .section-title { color: #fff; }
+  #details .divider { background: linear-gradient(90deg, var(--green-light), var(--turquoise)); margin: 0 auto 3.5rem; }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .tl-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    padding: 2.5rem 1.75rem;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .tl-card:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-5px);
+  }
+
+  .tl-icon { font-size: 1.8rem; display: block; margin-bottom: 1.1rem; }
+
+  .tl-time {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--green-light);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-event {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .tl-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.65;
+  }
+
+  .venue-card {
+    max-width: 680px;
+    margin: 4rem auto 0;
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    text-align: center;
+  }
+
+  .venue-name {
+    font-family: var(--script);
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+  }
+
+  .venue-location {
+    font-size: 0.66rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .venue-desc {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ════════════════════════════════════════════
+     TRAVEL
+  ════════════════════════════════════════════ */
+  #travel {
+    padding: var(--pad);
+    background: var(--sand);
+  }
+
+  .travel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .travel-card {
+    background: #fff;
+    border-radius: 3px;
+    padding: 2.4rem 2rem;
+    border-top: 3px solid var(--green-light);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .travel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.1);
+  }
+
+  .travel-icon { font-size: 1.9rem; display: block; margin-bottom: 1rem; }
+
+  .travel-title {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: var(--green-deep);
+    margin-bottom: 0.9rem;
+  }
+
+  .travel-body {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.78;
+    color: var(--text-mid);
+  }
+
+  .travel-body strong {
+    font-weight: 500;
+    color: var(--green-mid);
+  }
+
+  /* ════════════════════════════════════════════
+     RSVP
+  ════════════════════════════════════════════ */
+  #rsvp {
+    padding: var(--pad);
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .rsvp-deadline {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 0.4rem;
+  }
+
+  .rsvp-form {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .fg {
+    margin-bottom: 1.4rem;
+  }
+
+  .fg label {
+    display: block;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 0.45rem;
+  }
+
+  .fg input,
+  .fg select,
+  .fg textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(0,0,0,0.13);
+    border-radius: 3px;
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .fg input:focus,
+  .fg select:focus,
+  .fg textarea:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+  }
+
+  .fg textarea { resize: vertical; min-height: 100px; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.95rem 3rem;
+    background: var(--green-deep);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.22s, transform 0.22s;
+  }
+
+  .btn-primary:hover {
+    background: var(--green-mid);
+    transform: translateY(-2px);
+  }
+
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .rsvp-success-script {
+    font-family: var(--script);
+    font-size: 3.5rem;
+    color: var(--green-mid);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .rsvp-success p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-mid);
+  }
+
+  /* ════════════════════════════════════════════
+     FOOTER
+  ════════════════════════════════════════════ */
+  footer {
+    background: var(--green-deep);
+    text-align: center;
+    padding: 3.5rem 2rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .footer-script {
+    font-family: var(--script);
+    font-size: 2.8rem;
+    color: rgba(255,255,255,0.82);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-date {
+    font-size: 0.63rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+
+  .footer-note {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.55;
+  }
+
+  /* ════════════════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════════════════ */
+  @media (max-width: 860px) {
+    #our-story {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .story-img-wrap { order: -1; max-width: 380px; margin: 0 auto; }
+  }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .cd-sep { display: none; }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(27,67,50,0.98);
+      flex-direction: column;
+      padding: 0.75rem 0 1.25rem;
+      gap: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .nav-links.open { display: flex; }
+    .nav-links a { display: block; padding: 0.85rem 2rem; }
+    .nav-toggle { display: flex; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     FLORA OVERLAY
+═══════════════════════════════════════════ -->
+<div id="flora-overlay">
+
+  <!-- ═══ LEFT PANEL ═══ -->
+  <div class="flora-panel" id="flora-left">
+    <svg width="100%" height="100%" viewBox="0 0 560 900"
+         preserveAspectRatio="xMaxYMid slice"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lf-trunk" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#2e1204"/>
+          <stop offset="38%"  stop-color="#6b3e18"/>
+          <stop offset="62%"  stop-color="#7c4e22"/>
+          <stop offset="100%" stop-color="#2e1204"/>
+        </linearGradient>
+        <linearGradient id="lf-banana" x1="20%" y1="0%" x2="80%" y2="100%">
+          <stop offset="0%"   stop-color="#74c69d"/>
+          <stop offset="100%" stop-color="#1b4332"/>
+        </linearGradient>
+        <linearGradient id="lf-broad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#52b788"/>
+          <stop offset="100%" stop-color="#1b4332"/>
+        </linearGradient>
+        <symbol id="lf-fa" overflow="visible">
+          <path d="M 0 0 C 7-55,11-120,5-195" stroke="#2d6a4f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <g transform="translate(3,-22)">
+            <path d="M 0 0 C -4-10,-5-32,0-46 C 5-32,4-10,0 0Z" transform="rotate(-55)" fill="#52b788" opacity="0.9"/>
+            <path d="M 0 0 C -3-9,-4-28,0-40 C 4-28,3-9,0 0Z"   transform="rotate(5)"   fill="#40916c" opacity="0.85"/>
+          </g>
+          <g transform="translate(5,-46)">
+            <path d="M 0 0 C -5-13,-7-42,0-60 C 7-42,5-13,0 0Z" transform="rotate(-58)" fill="#52b788" opacity="0.88"/>
+            <path d="M 0 0 C -4-11,-6-36,0-52 C 6-36,4-11,0 0Z" transform="rotate(6)"   fill="#40916c" opacity="0.82"/>
+          </g>
+          <g transform="translate(7,-70)">
+            <path d="M 0 0 C -6-16,-8-50,0-72 C 8-50,6-16,0 0Z" transform="rotate(-62)" fill="#40916c" opacity="0.86"/>
+            <path d="M 0 0 C -5-14,-7-44,0-63 C 7-44,5-14,0 0Z" transform="rotate(4)"   fill="#52b788" opacity="0.80"/>
+          </g>
+          <g transform="translate(9,-95)">
+            <path d="M 0 0 C -7-18,-9-56,0-80 C 9-56,7-18,0 0Z" transform="rotate(-64)" fill="#52b788" opacity="0.84"/>
+            <path d="M 0 0 C -6-15,-8-48,0-68 C 8-48,6-15,0 0Z" transform="rotate(4)"   fill="#2d6a4f" opacity="0.78"/>
+          </g>
+          <g transform="translate(9,-120)">
+            <path d="M 0 0 C -7-17,-9-52,0-74 C 9-52,7-17,0 0Z" transform="rotate(-62)" fill="#40916c" opacity="0.80"/>
+            <path d="M 0 0 C -5-14,-7-42,0-60 C 7-42,5-14,0 0Z" transform="rotate(5)"   fill="#52b788" opacity="0.74"/>
+          </g>
+          <g transform="translate(8,-144)">
+            <path d="M 0 0 C -6-15,-8-46,0-65 C 8-46,6-15,0 0Z" transform="rotate(-58)" fill="#2d6a4f" opacity="0.75"/>
+            <path d="M 0 0 C -4-12,-6-37,0-53 C 6-37,4-12,0 0Z" transform="rotate(7)"   fill="#40916c" opacity="0.68"/>
+          </g>
+          <g transform="translate(6,-166)">
+            <path d="M 0 0 C -5-13,-6-38,0-54 C 6-38,5-13,0 0Z" transform="rotate(-55)" fill="#2d6a4f" opacity="0.68"/>
+            <path d="M 0 0 C -3-10,-5-30,0-43 C 5-30,3-10,0 0Z" transform="rotate(8)"   fill="#40916c" opacity="0.62"/>
+          </g>
+          <g transform="translate(4,-185)">
+            <path d="M 0 0 C -4-10,-5-30,0-43 C 5-30,4-10,0 0Z" transform="rotate(-50)" fill="#52b788" opacity="0.60"/>
+            <path d="M 0 0 C -3-8,-4-24,0-34 C 4-24,3-8,0 0Z"   transform="rotate(10)"  fill="#40916c" opacity="0.55"/>
+          </g>
+        </symbol>
+      </defs>
+
+      <!-- depth blobs -->
+      <ellipse cx="280" cy="450" rx="310" ry="500" fill="#0d2b1a" opacity="0.5"/>
+      <ellipse cx="80"  cy="700" rx="200" ry="300" fill="#155d27" opacity="0.28"/>
+
+      <!-- banana leaf 1 -->
+      <path d="M 20 20 C 40 150,120 370,180 570 C 220 710,200 830,110 920
+               C 70 820,100 650,55 510 C 10 370,-30 190,20 20Z"
+            fill="url(#lf-banana)" opacity="0.72"/>
+      <path d="M 20 20 C 65 240,105 530,100 830" stroke="#1b4332" stroke-width="2" fill="none" opacity="0.38"/>
+
+      <!-- banana leaf 2 -->
+      <path d="M 85 0 C 112 115,215 310,295 494 C 354 616,368 750,302 902
+               C 260 792,246 612,183 452 C 120 292,44 130,85 0Z"
+            fill="url(#lf-banana)" opacity="0.60"/>
+      <path d="M 85 0 C 150 215,230 530,250 882" stroke="#1b4332" stroke-width="1.8" fill="none" opacity="0.32"/>
+
+      <!-- broad philodendron leaf -->
+      <path d="M 358 902 C 325 808,275 710,234 586 C 184 448,202 326,282 236
+               C 322 196,384 190,424 220 C 464 250,484 316,474 406
+               C 464 496,414 576,404 664 C 464 716,526 766,536 846
+               C 514 886,454 902,404 902Z"
+            fill="url(#lf-broad)" opacity="0.76"/>
+
+      <!-- PALM TREE 1 — trunk base ~(97,940), crown ~(288,256) -->
+      <path d="M 80 942 C 92 782,136 624,186 484 C 220 386,256 316,276 268
+               C 288 260,300 258,308 260 C 298 264,286 268,274 276
+               C 254 322,218 394,184 496 C 134 638,90 800,76 942Z"
+            fill="url(#lf-trunk)"/>
+      <path d="M 92 872 Q 154 866,218 872" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.55"/>
+      <path d="M 97 808 Q 158 802,216 808" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.5"/>
+      <path d="M 104 744 Q 163 738,212 744" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.45"/>
+      <path d="M 114 680 Q 170 674,208 680" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.4"/>
+      <path d="M 128 616 Q 176 611,205 616" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.35"/>
+      <path d="M 145 554 Q 184 549,203 553" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.3"/>
+      <path d="M 164 494 Q 192 490,202 493" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.25"/>
+      <path d="M 185 436 Q 204 432,208 435" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.2"/>
+      <!-- 9 crown frond arms -->
+      <use href="#lf-fa" transform="translate(291,259) rotate(-160)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(-130)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(-100)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(-70)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(-40)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(-10)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(20)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(50)"/>
+      <use href="#lf-fa" transform="translate(291,259) rotate(80)"/>
+      <circle cx="291" cy="259" r="15" fill="#2d6a4f"/>
+      <circle cx="291" cy="259" r="8"  fill="#40916c"/>
+
+      <!-- PALM TREE 2 — leaning left, base ~(-8,940), crown ~(168,308) -->
+      <path d="M -32 942 C -16 802,30 654,84 514 C 114 424,142 362,160 318
+               C 170 308,180 304,188 306 C 178 311,167 316,155 324
+               C 136 370,108 434,78 526 C 24 668,-22 816,-40 942Z"
+            fill="url(#lf-trunk)"/>
+      <path d="M -20 874 Q 26 868,70 874" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.5"/>
+      <path d="M -12 806 Q 34 800,76 806" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.45"/>
+      <path d="M -2  738 Q 44 732,82 738" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.4"/>
+      <path d="M 12  670 Q 54 664,86 670" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.35"/>
+      <path d="M 28  604 Q 64 599,89 603" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.3"/>
+      <!-- 8 crown frond arms -->
+      <use href="#lf-fa" transform="translate(172,310) rotate(-162)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(-133)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(-104)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(-75)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(-46)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(-17)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(12)"/>
+      <use href="#lf-fa" transform="translate(172,310) rotate(41)"/>
+      <circle cx="172" cy="310" r="12" fill="#2d6a4f"/>
+      <circle cx="172" cy="310" r="6"  fill="#40916c"/>
+
+      <!-- monstera leaf (large) -->
+      <g transform="translate(440,488) rotate(14)">
+        <path d="M 0 0 C -15-50,-30-110,-15-180 C 0-250,55-270,80-210
+                 C 105-150,75-80,55-30 C 90-10,120 20,105 55
+                 C 90 90,40 70,0 0Z" fill="#2d6a4f" opacity="0.88"/>
+        <ellipse cx="-5" cy="-148" rx="14" ry="22" fill="#1b4332" opacity="0.7"/>
+        <ellipse cx="38" cy="-105" rx="11" ry="18" fill="#1b4332" opacity="0.65"/>
+        <ellipse cx="-12" cy="-98" rx="9"  ry="15" fill="#1b4332" opacity="0.55"/>
+        <path d="M 0 0 C 20-80,30-160,0-240" stroke="#1b4332" stroke-width="1.5" fill="none" opacity="0.38"/>
+      </g>
+
+      <!-- monstera leaf (smaller, lower) -->
+      <g transform="translate(365,672) rotate(-6)">
+        <path d="M 0 0 C -12-40,-24-88,-12-146 C 0-198,43-214,63-166
+                 C 83-118,59-62,43-22 C 71-6,94 16,82 42
+                 C 70 68,30 52,0 0Z" fill="#40916c" opacity="0.82"/>
+        <ellipse cx="-4" cy="-116" rx="10" ry="16" fill="#2d6a4f" opacity="0.62"/>
+        <ellipse cx="28" cy="-82"  rx="8"  ry="13" fill="#2d6a4f" opacity="0.58"/>
+      </g>
+
+      <!-- hibiscus (pink) -->
+      <g transform="translate(492,706)">
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.92" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.89" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.87" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.89" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.92" transform="rotate(288)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#8b0025" stroke-width="1.2" opacity="0.5" transform="rotate(0)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#8b0025" stroke-width="1.2" opacity="0.5" transform="rotate(72)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#8b0025" stroke-width="1.2" opacity="0.5" transform="rotate(144)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#8b0025" stroke-width="1.2" opacity="0.5" transform="rotate(216)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#8b0025" stroke-width="1.2" opacity="0.5" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="14" fill="#ffd166"/>
+        <circle cx="0" cy="0" r="6"  fill="#e9b94a"/>
+      </g>
+
+      <!-- hibiscus (smaller, coral, mid) -->
+      <g transform="translate(420,416) scale(0.7)">
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e91e63" opacity="0.85" transform="rotate(36)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e91e63" opacity="0.82" transform="rotate(108)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e91e63" opacity="0.80" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e91e63" opacity="0.82" transform="rotate(252)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e91e63" opacity="0.85" transform="rotate(324)"/>
+        <circle cx="0" cy="0" r="14" fill="#ffd166"/>
+        <circle cx="0" cy="0" r="6"  fill="#e9b94a"/>
+      </g>
+
+      <!-- undergrowth fern fans -->
+      <g transform="translate(52,876)">
+        <path d="M 0 0 C -12-35,-14-92,0-130 C 14-92,12-35,0 0Z" transform="rotate(-42)" fill="#2d6a4f" opacity="0.85"/>
+        <path d="M 0 0 C -12-35,-14-92,0-130 C 14-92,12-35,0 0Z" transform="rotate(-22)" fill="#40916c" opacity="0.82"/>
+        <path d="M 0 0 C -13-38,-15-100,0-140 C 15-100,13-38,0 0Z" transform="rotate(0)"  fill="#52b788" opacity="0.80"/>
+        <path d="M 0 0 C -12-35,-14-92,0-130 C 14-92,12-35,0 0Z" transform="rotate(22)"  fill="#40916c" opacity="0.82"/>
+        <path d="M 0 0 C -10-30,-12-80,0-112 C 12-80,10-30,0 0Z" transform="rotate(44)"  fill="#2d6a4f" opacity="0.76"/>
+        <path d="M 0 0 C -9-26,-11-70,0-98 C 11-70,9-26,0 0Z"   transform="rotate(64)"  fill="#1b4332" opacity="0.70"/>
+        <path d="M 0 0 C -10-30,-12-80,0-112 C 12-80,10-30,0 0Z" transform="rotate(-62)" fill="#1b4332" opacity="0.70"/>
+      </g>
+      <g transform="translate(224,884)">
+        <path d="M 0 0 C -10-30,-12-82,0-114 C 12-82,10-30,0 0Z" transform="rotate(-36)" fill="#40916c" opacity="0.80"/>
+        <path d="M 0 0 C -11-33,-13-88,0-122 C 13-88,11-33,0 0Z" transform="rotate(-14)" fill="#52b788" opacity="0.78"/>
+        <path d="M 0 0 C -11-33,-13-88,0-122 C 13-88,11-33,0 0Z" transform="rotate(10)"  fill="#40916c" opacity="0.78"/>
+        <path d="M 0 0 C -10-30,-12-80,0-112 C 12-80,10-30,0 0Z" transform="rotate(34)"  fill="#2d6a4f" opacity="0.74"/>
+        <path d="M 0 0 C -9-26,-11-70,0-98 C 11-70,9-26,0 0Z"   transform="rotate(56)"  fill="#1b4332" opacity="0.68"/>
+      </g>
+      <g transform="translate(404,892)">
+        <path d="M 0 0 C -10-30,-12-82,0-114 C 12-82,10-30,0 0Z" transform="rotate(-30)" fill="#52b788" opacity="0.78"/>
+        <path d="M 0 0 C -11-33,-14-90,0-126 C 14-90,11-33,0 0Z" transform="rotate(-8)"  fill="#40916c" opacity="0.76"/>
+        <path d="M 0 0 C -11-33,-14-90,0-126 C 14-90,11-33,0 0Z" transform="rotate(16)"  fill="#52b788" opacity="0.76"/>
+        <path d="M 0 0 C -9-27,-12-74,0-104 C 12-74,9-27,0 0Z"  transform="rotate(40)"  fill="#2d6a4f" opacity="0.70"/>
+      </g>
+
+      <!-- ground cover -->
+      <path d="M -30 902 C 12 844,72 804,92 724 C 112 804,92 854,42 902Z"  fill="#155d27" opacity="0.85"/>
+      <path d="M 62 902 C 112 834,192 784,224 704 C 252 784,212 844,152 902Z" fill="#1b4332" opacity="0.80"/>
+      <path d="M 162 902 C 212 844,302 804,342 724 C 362 804,312 858,242 902Z" fill="#2d6a4f" opacity="0.75"/>
+      <path d="M 312 902 C 362 854,442 814,492 744 C 510 814,462 864,392 902Z" fill="#40916c" opacity="0.70"/>
+      <path d="M 452 902 C 492 858,542 828,572 774 C 576 832,542 872,502 902Z" fill="#1b4332" opacity="0.75"/>
+    </svg>
+  </div>
+
+  <!-- ═══ RIGHT PANEL ═══ -->
+  <div class="flora-panel" id="flora-right">
+    <svg width="100%" height="100%" viewBox="0 0 560 900"
+         preserveAspectRatio="xMinYMid slice"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="rf-trunk" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#2e1204"/>
+          <stop offset="38%"  stop-color="#6b3e18"/>
+          <stop offset="62%"  stop-color="#7c4e22"/>
+          <stop offset="100%" stop-color="#2e1204"/>
+        </linearGradient>
+        <linearGradient id="rf-banana" x1="80%" y1="0%" x2="20%" y2="100%">
+          <stop offset="0%"   stop-color="#74c69d"/>
+          <stop offset="100%" stop-color="#1b4332"/>
+        </linearGradient>
+        <linearGradient id="rf-broad" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stop-color="#52b788"/>
+          <stop offset="100%" stop-color="#1b4332"/>
+        </linearGradient>
+        <symbol id="rf-fa" overflow="visible">
+          <path d="M 0 0 C -7-55,-11-120,-5-195" stroke="#2d6a4f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <g transform="translate(-3,-22)">
+            <path d="M 0 0 C 4-10,5-32,0-46 C -5-32,-4-10,0 0Z" transform="rotate(55)"  fill="#52b788" opacity="0.9"/>
+            <path d="M 0 0 C 3-9,4-28,0-40 C -4-28,-3-9,0 0Z"   transform="rotate(-5)"  fill="#40916c" opacity="0.85"/>
+          </g>
+          <g transform="translate(-5,-46)">
+            <path d="M 0 0 C 5-13,7-42,0-60 C -7-42,-5-13,0 0Z" transform="rotate(58)"  fill="#52b788" opacity="0.88"/>
+            <path d="M 0 0 C 4-11,6-36,0-52 C -6-36,-4-11,0 0Z" transform="rotate(-6)"  fill="#40916c" opacity="0.82"/>
+          </g>
+          <g transform="translate(-7,-70)">
+            <path d="M 0 0 C 6-16,8-50,0-72 C -8-50,-6-16,0 0Z" transform="rotate(62)"  fill="#40916c" opacity="0.86"/>
+            <path d="M 0 0 C 5-14,7-44,0-63 C -7-44,-5-14,0 0Z" transform="rotate(-4)"  fill="#52b788" opacity="0.80"/>
+          </g>
+          <g transform="translate(-9,-95)">
+            <path d="M 0 0 C 7-18,9-56,0-80 C -9-56,-7-18,0 0Z" transform="rotate(64)"  fill="#52b788" opacity="0.84"/>
+            <path d="M 0 0 C 6-15,8-48,0-68 C -8-48,-6-15,0 0Z" transform="rotate(-4)"  fill="#2d6a4f" opacity="0.78"/>
+          </g>
+          <g transform="translate(-9,-120)">
+            <path d="M 0 0 C 7-17,9-52,0-74 C -9-52,-7-17,0 0Z" transform="rotate(62)"  fill="#40916c" opacity="0.80"/>
+            <path d="M 0 0 C 5-14,7-42,0-60 C -7-42,-5-14,0 0Z" transform="rotate(-5)"  fill="#52b788" opacity="0.74"/>
+          </g>
+          <g transform="translate(-8,-144)">
+            <path d="M 0 0 C 6-15,8-46,0-65 C -8-46,-6-15,0 0Z" transform="rotate(58)"  fill="#2d6a4f" opacity="0.75"/>
+            <path d="M 0 0 C 4-12,6-37,0-53 C -6-37,-4-12,0 0Z" transform="rotate(-7)"  fill="#40916c" opacity="0.68"/>
+          </g>
+          <g transform="translate(-6,-166)">
+            <path d="M 0 0 C 5-13,6-38,0-54 C -6-38,-5-13,0 0Z" transform="rotate(55)"  fill="#2d6a4f" opacity="0.68"/>
+            <path d="M 0 0 C 3-10,5-30,0-43 C -5-30,-3-10,0 0Z" transform="rotate(-8)"  fill="#40916c" opacity="0.62"/>
+          </g>
+          <g transform="translate(-4,-185)">
+            <path d="M 0 0 C 4-10,5-30,0-43 C -5-30,-4-10,0 0Z" transform="rotate(50)"  fill="#52b788" opacity="0.60"/>
+            <path d="M 0 0 C 3-8,4-24,0-34 C -4-24,-3-8,0 0Z"   transform="rotate(-10)" fill="#40916c" opacity="0.55"/>
+          </g>
+        </symbol>
+      </defs>
+
+      <!-- depth blobs -->
+      <ellipse cx="280" cy="450" rx="310" ry="500" fill="#0d2b1a" opacity="0.5"/>
+      <ellipse cx="480" cy="700" rx="200" ry="300" fill="#155d27" opacity="0.28"/>
+
+      <!-- banana leaf 1 (from upper right) -->
+      <path d="M 540 20 C 520 150,440 370,380 570 C 340 710,360 830,450 920
+               C 490 820,460 650,505 510 C 550 370,590 190,540 20Z"
+            fill="url(#rf-banana)" opacity="0.72"/>
+      <path d="M 540 20 C 495 240,455 530,460 830" stroke="#1b4332" stroke-width="2" fill="none" opacity="0.38"/>
+
+      <!-- banana leaf 2 -->
+      <path d="M 475 0 C 448 115,345 310,265 494 C 206 616,192 750,258 902
+               C 300 792,314 612,377 452 C 440 292,516 130,475 0Z"
+            fill="url(#rf-banana)" opacity="0.60"/>
+      <path d="M 475 0 C 410 215,330 530,310 882" stroke="#1b4332" stroke-width="1.8" fill="none" opacity="0.32"/>
+
+      <!-- broad leaf (left side of right panel) -->
+      <path d="M 202 902 C 235 808,285 710,326 586 C 376 448,358 326,278 236
+               C 238 196,176 190,136 220 C 96 250,76 316,86 406
+               C 96 496,146 576,156 664 C 96 716,34 766,24 846
+               C 46 886,106 902,156 902Z"
+            fill="url(#rf-broad)" opacity="0.76"/>
+
+      <!-- PALM TREE 1 — trunk base ~(463,940), crown ~(269,256) -->
+      <path d="M 480 942 C 468 782,424 624,374 484 C 340 386,304 316,284 268
+               C 272 260,260 258,252 260 C 262 264,274 268,286 276
+               C 306 322,342 394,376 496 C 426 638,470 800,484 942Z"
+            fill="url(#rf-trunk)"/>
+      <path d="M 468 872 Q 406 866,342 872" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.55"/>
+      <path d="M 463 808 Q 402 802,344 808" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.5"/>
+      <path d="M 456 744 Q 397 738,348 744" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.45"/>
+      <path d="M 446 680 Q 390 674,352 680" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.4"/>
+      <path d="M 432 616 Q 384 611,355 616" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.35"/>
+      <path d="M 415 554 Q 376 549,357 553" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.3"/>
+      <path d="M 396 494 Q 368 490,358 493" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.25"/>
+      <path d="M 375 436 Q 356 432,352 435" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.2"/>
+      <!-- 9 crown frond arms (mirrored angles) -->
+      <use href="#rf-fa" transform="translate(269,259) rotate(160)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(130)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(100)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(70)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(40)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(10)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(-20)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(-50)"/>
+      <use href="#rf-fa" transform="translate(269,259) rotate(-80)"/>
+      <circle cx="269" cy="259" r="15" fill="#2d6a4f"/>
+      <circle cx="269" cy="259" r="8"  fill="#40916c"/>
+
+      <!-- PALM TREE 2 — leaning right, base ~(568,940), crown ~(388,308) -->
+      <path d="M 592 942 C 576 802,530 654,476 514 C 446 424,418 362,400 318
+               C 390 308,380 304,372 306 C 382 311,393 316,405 324
+               C 424 370,452 434,482 526 C 536 668,582 816,600 942Z"
+            fill="url(#rf-trunk)"/>
+      <path d="M 580 874 Q 534 868,490 874" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.5"/>
+      <path d="M 572 806 Q 526 800,484 806" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.45"/>
+      <path d="M 562 738 Q 516 732,478 738" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.4"/>
+      <path d="M 548 670 Q 506 664,474 670" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.35"/>
+      <path d="M 532 604 Q 496 599,471 603" stroke="#1e0a02" stroke-width="1.8" fill="none" opacity="0.3"/>
+      <!-- 8 crown frond arms -->
+      <use href="#rf-fa" transform="translate(388,310) rotate(162)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(133)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(104)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(75)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(46)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(17)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(-12)"/>
+      <use href="#rf-fa" transform="translate(388,310) rotate(-41)"/>
+      <circle cx="388" cy="310" r="12" fill="#2d6a4f"/>
+      <circle cx="388" cy="310" r="6"  fill="#40916c"/>
+
+      <!-- monstera leaf -->
+      <g transform="translate(120,488) rotate(-14) scale(-1,1)">
+        <path d="M 0 0 C -15-50,-30-110,-15-180 C 0-250,55-270,80-210
+                 C 105-150,75-80,55-30 C 90-10,120 20,105 55
+                 C 90 90,40 70,0 0Z" fill="#2d6a4f" opacity="0.88"/>
+        <ellipse cx="-5" cy="-148" rx="14" ry="22" fill="#1b4332" opacity="0.7"/>
+        <ellipse cx="38" cy="-105" rx="11" ry="18" fill="#1b4332" opacity="0.65"/>
+        <ellipse cx="-12" cy="-98" rx="9"  ry="15" fill="#1b4332" opacity="0.55"/>
+        <path d="M 0 0 C 20-80,30-160,0-240" stroke="#1b4332" stroke-width="1.5" fill="none" opacity="0.38"/>
+      </g>
+
+      <!-- monstera (smaller) -->
+      <g transform="translate(195,672) rotate(6) scale(-1,1)">
+        <path d="M 0 0 C -12-40,-24-88,-12-146 C 0-198,43-214,63-166
+                 C 83-118,59-62,43-22 C 71-6,94 16,82 42
+                 C 70 68,30 52,0 0Z" fill="#40916c" opacity="0.82"/>
+        <ellipse cx="-4" cy="-116" rx="10" ry="16" fill="#2d6a4f" opacity="0.62"/>
+        <ellipse cx="28" cy="-82"  rx="8"  ry="13" fill="#2d6a4f" opacity="0.58"/>
+      </g>
+
+      <!-- hibiscus (coral) -->
+      <g transform="translate(68,706)">
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e76f51" opacity="0.92" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e76f51" opacity="0.89" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e76f51" opacity="0.87" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e76f51" opacity="0.89" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#e76f51" opacity="0.92" transform="rotate(288)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#a03010" stroke-width="1.2" opacity="0.5" transform="rotate(0)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#a03010" stroke-width="1.2" opacity="0.5" transform="rotate(72)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#a03010" stroke-width="1.2" opacity="0.5" transform="rotate(144)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#a03010" stroke-width="1.2" opacity="0.5" transform="rotate(216)"/>
+        <line x1="0" y1="0" x2="0" y2="-78" stroke="#a03010" stroke-width="1.2" opacity="0.5" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="14" fill="#ffd166"/>
+        <circle cx="0" cy="0" r="6"  fill="#e9b94a"/>
+      </g>
+
+      <!-- hibiscus (pink, smaller) -->
+      <g transform="translate(140,416) scale(0.7)">
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.85" transform="rotate(36)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.82" transform="rotate(108)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.80" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.82" transform="rotate(252)"/>
+        <ellipse cx="0" cy="-38" rx="22" ry="44" fill="#c9184a" opacity="0.85" transform="rotate(324)"/>
+        <circle cx="0" cy="0" r="14" fill="#ffd166"/>
+        <circle cx="0" cy="0" r="6"  fill="#e9b94a"/>
+      </g>
+
+      <!-- undergrowth fern fans (mirrored) -->
+      <g transform="translate(508,876)">
+        <path d="M 0 0 C 12-35,14-92,0-130 C -14-92,-12-35,0 0Z" transform="rotate(42)"  fill="#2d6a4f" opacity="0.85"/>
+        <path d="M 0 0 C 12-35,14-92,0-130 C -14-92,-12-35,0 0Z" transform="rotate(22)"  fill="#40916c" opacity="0.82"/>
+        <path d="M 0 0 C 13-38,15-100,0-140 C -15-100,-13-38,0 0Z" transform="rotate(0)"  fill="#52b788" opacity="0.80"/>
+        <path d="M 0 0 C 12-35,14-92,0-130 C -14-92,-12-35,0 0Z" transform="rotate(-22)" fill="#40916c" opacity="0.82"/>
+        <path d="M 0 0 C 10-30,12-80,0-112 C -12-80,-10-30,0 0Z" transform="rotate(-44)" fill="#2d6a4f" opacity="0.76"/>
+        <path d="M 0 0 C 9-26,11-70,0-98 C -11-70,-9-26,0 0Z"   transform="rotate(-64)" fill="#1b4332" opacity="0.70"/>
+        <path d="M 0 0 C 10-30,12-80,0-112 C -12-80,-10-30,0 0Z" transform="rotate(62)"  fill="#1b4332" opacity="0.70"/>
+      </g>
+      <g transform="translate(336,884)">
+        <path d="M 0 0 C 10-30,12-82,0-114 C -12-82,-10-30,0 0Z" transform="rotate(36)"  fill="#40916c" opacity="0.80"/>
+        <path d="M 0 0 C 11-33,13-88,0-122 C -13-88,-11-33,0 0Z" transform="rotate(14)"  fill="#52b788" opacity="0.78"/>
+        <path d="M 0 0 C 11-33,13-88,0-122 C -13-88,-11-33,0 0Z" transform="rotate(-10)" fill="#40916c" opacity="0.78"/>
+        <path d="M 0 0 C 10-30,12-80,0-112 C -12-80,-10-30,0 0Z" transform="rotate(-34)" fill="#2d6a4f" opacity="0.74"/>
+        <path d="M 0 0 C 9-26,11-70,0-98 C -11-70,-9-26,0 0Z"   transform="rotate(-56)" fill="#1b4332" opacity="0.68"/>
+      </g>
+      <g transform="translate(156,892)">
+        <path d="M 0 0 C 10-30,12-82,0-114 C -12-82,-10-30,0 0Z" transform="rotate(30)"  fill="#52b788" opacity="0.78"/>
+        <path d="M 0 0 C 11-33,14-90,0-126 C -14-90,-11-33,0 0Z" transform="rotate(8)"   fill="#40916c" opacity="0.76"/>
+        <path d="M 0 0 C 11-33,14-90,0-126 C -14-90,-11-33,0 0Z" transform="rotate(-16)" fill="#52b788" opacity="0.76"/>
+        <path d="M 0 0 C 9-27,12-74,0-104 C -12-74,-9-27,0 0Z"  transform="rotate(-40)" fill="#2d6a4f" opacity="0.70"/>
+      </g>
+
+      <!-- ground cover -->
+      <path d="M 590 902 C 548 844,488 804,468 724 C 448 804,468 854,518 902Z" fill="#155d27" opacity="0.85"/>
+      <path d="M 498 902 C 448 834,368 784,336 704 C 308 784,348 844,408 902Z" fill="#1b4332" opacity="0.80"/>
+      <path d="M 398 902 C 348 844,258 804,218 724 C 198 804,248 858,318 902Z" fill="#2d6a4f" opacity="0.75"/>
+      <path d="M 248 902 C 198 854,118 814,68 744 C 50 814,98 864,168 902Z"   fill="#40916c" opacity="0.70"/>
+      <path d="M 108 902 C 68 858,18 828,-12 774 C -16 832,18 872,58 902Z"    fill="#1b4332" opacity="0.75"/>
+    </svg>
+  </div>
+</div>
+<!-- Overlay title -->
+<div id="flora-title">
+  <span class="ft-script">Tyler &amp; Lizbeth</span>
+  <div class="ft-divider"></div>
+  <p class="ft-sub">June 27, 2027 &nbsp;·&nbsp; Jarabacoa, DR</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#home" class="nav-brand">T &amp; L</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#our-story">Our Story</a></li>
+    <li><a href="#details">The Day</a></li>
+    <li><a href="#travel">Travel</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-bg"></div>
+
+  <!-- Decorative corner leaves in hero -->
+  <svg class="hero-deco" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <!-- Top-left fronds -->
+    <path d="M -80 -80 C 40 40, 120 160, 220 120 C 160 220, 60 200, -40 120 Z"
+          fill="#2d6a4f" opacity="0.25"/>
+    <path d="M -60 0 C 60 80, 200 100, 260 30 C 200 150, 80 180, -20 130 Z"
+          fill="#40916c" opacity="0.18"/>
+    <path d="M 0 -40 C 80 30, 180 50, 200 -20 C 180 80, 80 100, 20 60 Z"
+          fill="#52b788" opacity="0.14"/>
+
+    <!-- Top-right fronds -->
+    <path d="M 1520 -80 C 1400 40, 1320 160, 1220 120 C 1280 220, 1380 200, 1480 120 Z"
+          fill="#2d6a4f" opacity="0.25"/>
+    <path d="M 1500 0 C 1380 80, 1240 100, 1180 30 C 1240 150, 1360 180, 1460 130 Z"
+          fill="#40916c" opacity="0.18"/>
+
+    <!-- Bottom vignette -->
+    <path d="M 0 900 Q 720 860, 1440 900 L 1440 960 L 0 960 Z"
+          fill="#081a10" opacity="0.5"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal">We&rsquo;re Getting Married</p>
+    <h1 class="hero-names reveal" style="transition-delay: 0.1s">
+      Tyler
+      <span class="hero-and">&amp;</span>
+      Lizbeth
+    </h1>
+    <p class="hero-meta reveal" style="transition-delay: 0.2s">
+      June 27, 2027 <em>·</em> Jarabacoa, Dominican Republic
+    </p>
+
+    <div class="countdown reveal" style="transition-delay: 0.3s">
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-days">--</span>
+        <span class="cd-label">Days</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-hours">--</span>
+        <span class="cd-label">Hours</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-min">--</span>
+        <span class="cd-label">Minutes</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-sec">--</span>
+        <span class="cd-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     OUR STORY
+═══════════════════════════════════════════ -->
+<section id="our-story">
+  <div class="story-text">
+    <p class="section-label reveal">Chapter One</p>
+    <h2 class="section-title reveal" style="transition-delay: 0.08s">
+      Our <em>Story</em>
+    </h2>
+    <div class="divider reveal" style="transition-delay: 0.12s; margin-left: 0;"></div>
+
+    <p class="reveal" style="transition-delay: 0.16s">
+<!--      Every great love story begins with a moment — a glance, a word,-->
+<!--      a laugh that lingers just a little longer than expected. For us, that-->
+<!--      moment was the spark that set everything in motion, and what followed-->
+<!--      was an adventure neither of us could have scripted.-->
+      some cheesy text here
+    </p>
+
+    <div class="story-quote reveal" style="transition-delay: 0.22s">
+      "some little blurb"
+    </div>
+
+    <p class="reveal" style="transition-delay: 0.26s">
+      Through quiet mornings and wandering afternoons, we found in each
+      other a home. Now we're ready to begin the next chapter — surrounded
+      by the people we love most, in a place as vibrant and warm as the
+      life we're building together.
+    </p>
+  </div>
+
+  <div class="story-img-wrap reveal" style="transition-delay: 0.18s">
+    <div class="story-frame">
+      <p class="story-frame-label">Add your photo here</p>
+    </div>
+    <div class="story-deco-box"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     THE DAY
+═══════════════════════════════════════════ -->
+<section id="details">
+  <p class="section-label reveal">June 27, 2027</p>
+  <h2 class="section-title reveal" style="transition-delay: 0.08s">
+    The <em>Day</em>
+  </h2>
+  <div class="divider reveal" style="transition-delay: 0.12s; margin: 0 auto 3.5rem;"></div>
+
+  <div class="timeline">
+    <div class="tl-card reveal" style="transition-delay: 0.1s">
+      <span class="tl-icon">🌿</span>
+      <p class="tl-time">4:00 PM</p>
+      <h3 class="tl-event">Ceremony</h3>
+      <p class="tl-desc">
+        Join us as we exchange our vows in a lush tropical setting
+        in the heart of the Dominican Republic.
+      </p>
+    </div>
+    <div class="tl-card reveal" style="transition-delay: 0.2s">
+      <span class="tl-icon">🌺</span>
+      <p class="tl-time">5:00 PM</p>
+      <h3 class="tl-event">Cocktail Hour</h3>
+      <p class="tl-desc">
+        Sip rum punch and fresh tropical cocktails while soaking
+        in the mountain scenery and catching up with loved ones.
+      </p>
+    </div>
+    <div class="tl-card reveal" style="transition-delay: 0.3s">
+      <span class="tl-icon">🥂</span>
+      <p class="tl-time">6:30 PM</p>
+      <h3 class="tl-event">Reception</h3>
+      <p class="tl-desc">
+        Dinner, dancing, and celebrating under the stars with
+        the people who mean the most to us.
+      </p>
+    </div>
+  </div>
+
+  <div class="venue-card reveal" style="transition-delay: 0.25s">
+    <p class="venue-name">Jarabacoa, Dominican Republic</p>
+    <p class="venue-location">La Ciudad de las Flores &nbsp;·&nbsp; Valle del Río Yaque del Norte</p>
+    <p class="venue-desc">
+      Nestled in the mountains of the Cordillera Central, Jarabacoa is one of the
+      Dominican Republic's most beautiful hidden gems — lush, cool, and filled with
+      breathtaking waterfalls and natural landscapes. We couldn't imagine a more
+      magical backdrop for our celebration.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TRAVEL & STAY
+═══════════════════════════════════════════ -->
+<section id="travel">
+  <p class="section-label reveal">Getting There</p>
+  <h2 class="section-title reveal" style="transition-delay: 0.08s">
+    Travel &amp; <em>Stay</em>
+  </h2>
+  <div class="divider reveal" style="transition-delay: 0.12s; margin-left: 0; margin-bottom: 3rem;"></div>
+
+  <div class="travel-grid">
+    <div class="travel-card reveal" style="transition-delay: 0.1s">
+      <span class="travel-icon">✈️</span>
+      <h3 class="travel-title">By Air</h3>
+      <p class="travel-body">
+        Fly into <strong>Santiago Cibao (STI)</strong> — the closest airport,
+        roughly one hour from Jarabacoa. <strong>Las Américas (SDQ)</strong>
+        in Santo Domingo is a scenic 2.5-hour drive. We recommend arriving
+        the day before to settle in.
+      </p>
+    </div>
+    <div class="travel-card reveal" style="transition-delay: 0.2s">
+      <span class="travel-icon">🚗</span>
+      <h3 class="travel-title">Ground Transport</h3>
+      <p class="travel-body">
+        <strong>Renting a car</strong> is the most flexible option — the winding
+        mountain road into Jarabacoa is gorgeous. Private shuttles are available
+        from both airports. We'll share a curated list of trusted drivers closer
+        to the date.
+      </p>
+    </div>
+    <div class="travel-card reveal" style="transition-delay: 0.3s">
+      <span class="travel-icon">🏡</span>
+      <h3 class="travel-title">Where to Stay</h3>
+      <p class="travel-body">
+        From eco-lodges tucked into the jungle to elegant mountain resorts,
+        Jarabacoa has something for every traveler. We've reserved a block for
+        the wedding party at our venue — details coming soon for other guests.
+      </p>
+    </div>
+    <div class="travel-card reveal" style="transition-delay: 0.4s">
+      <span class="travel-icon">🌡️</span>
+      <h3 class="travel-title">What to Expect</h3>
+      <p class="travel-body">
+        June in Jarabacoa is warm but pleasantly cooler than the coast —
+        averaging <strong>72–82 °F</strong> (22–28 °C). Pack a light layer
+        for evenings. Dress code is <strong>tropical garden formal</strong>:
+        think linen, florals, and easy elegance.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     RSVP
+═══════════════════════════════════════════ -->
+<section id="rsvp">
+  <p class="rsvp-deadline reveal">RSVP by January 27, 2027</p>
+  <p class="section-label reveal" style="transition-delay: 0.05s">You&rsquo;re Invited</p>
+  <h2 class="section-title reveal" style="transition-delay: 0.1s">
+    Will You <em>Join Us?</em>
+  </h2>
+  <div class="divider reveal" style="transition-delay: 0.14s; margin-bottom: 3rem;"></div>
+
+  <form class="rsvp-form reveal" id="rsvp-form" style="transition-delay: 0.18s" onsubmit="handleRsvp(event)">
+    <div class="form-row">
+      <div class="fg">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first_name" placeholder="Your first name" required>
+      </div>
+      <div class="fg">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last_name" placeholder="Your last name" required>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@email.com" required>
+    </div>
+
+    <div class="fg">
+      <label for="attending">Will you attend?</label>
+      <select id="attending" name="attending" required>
+        <option value="" disabled selected>Please select…</option>
+        <option value="yes">Joyfully accepts</option>
+        <option value="no">Regretfully declines</option>
+      </select>
+    </div>
+
+    <div class="fg" id="guests-group" style="display:none">
+      <label for="guests">Number of Guests (including yourself)</label>
+      <select id="guests" name="guests">
+        <option value="1">1 — just me</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label for="dietary">Dietary Restrictions / Allergies</label>
+      <input type="text" id="dietary" name="dietary" placeholder="None, vegetarian, gluten-free, etc.">
+    </div>
+
+    <div class="fg">
+      <label for="message">A note for us (optional)</label>
+      <textarea id="message" name="message" placeholder="A kind word, a question about travel, or just a hello…"></textarea>
+    </div>
+
+    <div style="text-align:center">
+      <button type="submit" class="btn-primary">Send RSVP</button>
+    </div>
+  </form>
+
+  <div class="rsvp-success" id="rsvp-success">
+    <span class="rsvp-success-script">Thank you!</span>
+    <p>We&rsquo;ve received your RSVP and can&rsquo;t wait to celebrate with you.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <span class="footer-script">Tyler &amp; Lizbeth</span>
+  <p class="footer-date">June 27, 2027 &nbsp;·&nbsp; Jarabacoa, Dominican Republic</p>
+  <p class="footer-note">Made with love &nbsp;·&nbsp; ¡Hasta pronto!</p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
+<script>
+// ── Countdown ──────────────────────────────────────────────
+function tick() {
+  const target = new Date('2027-06-27T16:00:00');
+  const diff   = target - new Date();
+
+  if (diff <= 0) {
+    ['cd-days','cd-hours','cd-min','cd-sec'].forEach(id => {
+      document.getElementById(id).textContent = '00';
+    });
+    return;
+  }
+
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 864e5));
+  document.getElementById('cd-hours').textContent = pad(Math.floor(diff / 36e5)  % 24);
+  document.getElementById('cd-min').textContent   = pad(Math.floor(diff / 6e4)   % 60);
+  document.getElementById('cd-sec').textContent   = pad(Math.floor(diff / 1e3)   % 60);
+}
+tick();
+setInterval(tick, 1000);
+
+// ── Nav: solid on scroll ───────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 50);
+}, { passive: true });
+
+// ── Nav: active link on scroll ────────────────────────────
+const sections  = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    navAnchors.forEach(a => a.classList.remove('active'));
+    const match = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+    if (match) match.classList.add('active');
+  });
+}, { threshold: 0.38 }).observe && sections.forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      navAnchors.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (match) match.classList.add('active');
+    });
+  }, { threshold: 0.38 }).observe(s);
+});
+
+// ── Mobile nav toggle ─────────────────────────────────────
+const toggle   = document.getElementById('nav-toggle');
+const linksList = document.getElementById('nav-links');
+
+toggle.addEventListener('click', () => linksList.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => linksList.classList.remove('open'));
+});
+
+// ── Scroll reveal ─────────────────────────────────────────
+// Hero elements reveal after the overlay finishes (≈4.3s)
+const heroReveals = document.querySelectorAll('#home .reveal');
+setTimeout(() => {
+  heroReveals.forEach(el => el.classList.add('visible'));
+}, 2700);
+
+// All other elements use IntersectionObserver
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    revealObs.unobserve(e.target);
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal:not(#home .reveal)').forEach(el => {
+  revealObs.observe(el);
+});
+
+// ── RSVP guest count ──────────────────────────────────────
+document.getElementById('attending').addEventListener('change', function () {
+  document.getElementById('guests-group').style.display =
+    this.value === 'yes' ? 'block' : 'none';
+});
+
+// ── RSVP submit ──────────────────────────────────────────
+function handleRsvp(e) {
+  e.preventDefault();
+  document.getElementById('rsvp-form').style.display    = 'none';
+  document.getElementById('rsvp-success').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
